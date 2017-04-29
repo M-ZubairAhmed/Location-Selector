@@ -71,11 +71,14 @@ public class MainActivity extends AppCompatActivity {
             name = "No Name found!";
         }
 
+        address = "No Address found!";
+
         if (place.getAddress() != null) {
-            address = place.getAddress().toString();
-        } else {
-            address = "No Address found!";
+            if (!place.getAddress().toString().trim().isEmpty()) {
+                address = place.getAddress().toString();
+            }
         }
+        
         return ("Name : " + name +
                 "\nAddress : " + address +
                 "\nLat : " + place.getLatLng().latitude +
