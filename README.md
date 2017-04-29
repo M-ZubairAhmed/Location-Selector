@@ -1,5 +1,5 @@
 # Location Selector App
-This Android demonstrate simple Google Places Api's PlacePicker widget. The same code provided in this app to integrate Place Picker widget.
+This app demonstrates simple Google Places Api's [PlacePicker](https://developers.google.com/places/android-api/placepicker) widget. The same code provided in this app to integrate Place Picker widget.
 
 ![Place Picker Widget](http://i.imgur.com/zhUDtvGm.png)
 ![Confirmation Screen](http://i.imgur.com/6LtY04tm.png)
@@ -12,6 +12,8 @@ This Android demonstrate simple Google Places Api's PlacePicker widget. The same
 - Insert the copied key into [AndroidManifest](/app/src/main/AndroidManifest.xml) under *com.google.android.geo.API_KEY* metadata feild.
 - Compile the project.
 
+## References
 
-
+- [Googles Places API](https://developers.google.com/places/)
+- [Googles Places Sample](https://github.com/googlesamples/android-play-places/tree/master/PlacePicker)
 
