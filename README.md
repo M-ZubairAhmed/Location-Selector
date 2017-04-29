@@ -1,7 +1,9 @@
 # Location Selector App
 This Android demonstrate simple Google Places Api's PlacePicker widget. The same code provided in this app to integrate Place Picker widget.
 
-
+![Place Picker Widget](http://i.imgur.com/zhUDtvGm.png)
+![Confirmation Screen](http://i.imgur.com/6LtY04tm.png)
+![Home](http://i.imgur.com/3sEgzPLm.png)
 
 ## Installation
 
