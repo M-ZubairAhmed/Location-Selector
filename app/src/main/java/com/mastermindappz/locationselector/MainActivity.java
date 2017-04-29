@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 address = place.getAddress().toString();
             }
         }
-        
+
         return ("Name : " + name +
                 "\nAddress : " + address +
                 "\nLat : " + place.getLatLng().latitude +
