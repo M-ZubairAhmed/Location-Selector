@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -16,7 +17,6 @@ import com.google.android.gms.location.places.ui.PlacePicker;
 public class MainActivity extends AppCompatActivity {
 
     int PLACE_PICKER_REQUEST = 1;
-    String
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,15 +24,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button button = (Button) findViewById(R.id.placepickerbutton);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startPlacePickerActivity();
+                startPlacePickerIntent();
             }
         });
     }
 
-    private void startPlacePickerActivity() {
+    private void startPlacePickerIntent() {
         PlacePicker.IntentBuilder intentBuilder = new PlacePicker.IntentBuilder();
 
         try {
@@ -53,33 +54,40 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == PLACE_PICKER_REQUEST && resultCode == RESULT_OK) {
             Place place = PlacePicker.getPlace(this, data);
 
-            getPlaceDetails(place);
+            TextView addressTextBox = (TextView) findViewById(R.id.addresstext);
 
-            String name;
-            String address;
-            if (place.getName() != null) {
-                name = place.getName().toString();
-            } else {
-                name = "No Name found!";
-            }
+            String placeDetails = getPlaceDetails(place);
 
-            if (place.getAddress() != null) {
-                address = place.getAddress().toString();
-            } else {
-                address = "No Address found!";
-            }
-
-            getPlaceDetails(name, address, place.getLatLng().latitude, place.getLatLng().longitude, place.getId());
+            writePlaceDetails(placeDetails, addressTextBox);
         }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
-    String getPlaceDetails(String name, String address, double lat, double lng, String id) {
-        return ("Name : " + name + "\nAddress : " + address + "\nLat : " + lat + "\nLng : " + lng + "\nID : " + id);
+    private String getPlaceDetails(Place place) {
+        String name;
+        String address;
+        if (place.getName() != null) {
+            name = place.getName().toString();
+        } else {
+            name = "No Name found!";
+        }
+
+        if (place.getAddress() != null) {
+            address = place.getAddress().toString();
+        } else {
+            address = "No Address found!";
+        }
+        return ("Name : " + name +
+                "\nAddress : " + address +
+                "\nLat : " + place.getLatLng().latitude +
+                "\nLng : " + place.getLatLng().longitude +
+                "\nID : " + place.getId());
     }
 
-    void writePlaceDetails() {
-        TextView addresstext = (TextView) findViewById(R.id.addresstext);
-        addresstext.setText(getPlaceDetails());
+    void writePlaceDetails(String placeDetails, TextView addressTextBox) {
+        if (placeDetails != null && addressTextBox != null) {
+            addressTextBox.setText(placeDetails);
+        } else {
+            Toast.makeText(this, "There seems to be some problem!", Toast.LENGTH_SHORT).show();
+        }
     }
 }
